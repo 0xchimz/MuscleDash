@@ -3,7 +3,7 @@
 # =============== #
 Temp/
 Library/
-
+*_CompletedAssets*
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
