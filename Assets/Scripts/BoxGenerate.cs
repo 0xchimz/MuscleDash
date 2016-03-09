@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿
+
+
+using UnityEngine;
 
 public class BoxGenerate : MonoBehaviour
 {
@@ -10,21 +13,21 @@ public class BoxGenerate : MonoBehaviour
 	char[,,] map = new [,,]
 	{
 		{
-			{' ', ' ', ' ', ' ', ' ', ' ', '*'},
-			{' ', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', '*', '*', ' ', '*', '*', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', ' ', '*', '*', '*', '*', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', '*', ' ', '*', '*', '*', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', '*', '*', ' ', '*', '*', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', ' ', ' ', ' ', ' ', ' ', '*'},
-			{'*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+			{'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
 		}
 	};
 
@@ -39,19 +42,19 @@ public class BoxGenerate : MonoBehaviour
 	{
 		int currentMap = 0;
 		int widthBlock = map.GetLength (2);
-		int heightBlock = map.GetLength (1);
-		Debug.Log (widthBlock + " " + heightBlock);
-		for(int i=0; i<heightBlock; i++){
+		int lengthBlock = map.GetLength (1);
+		Debug.Log (widthBlock + " " + lengthBlock);
+		for(int i=0; i<lengthBlock; i++){
 			for(int j=0; j<widthBlock; j++){
 				if (map [currentMap, i, j] == '*') {
-					float y = (boxSize.y * -1) * i;
-					float x = boxSize.x * 3 * j;
+					float z = boxSize.z * i;
+					float x = boxSize.x * j;
 					//if (j < widthBlock / 2) {
 					//	x = boxSize.x * -3 * j;
 					//} else {
 					//	x = boxSize.x * 3 * j;
 					//}
-					BoxCollider clone = (BoxCollider)Instantiate (ground, new Vector3 (x, y, 0), Quaternion.identity);
+					BoxCollider clone = (BoxCollider)Instantiate (ground, new Vector3 (x - (widthBlock/2), -2, z - (lengthBlock/2)), Quaternion.identity);
 				}
 			}
 		}
