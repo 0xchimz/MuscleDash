@@ -1,57 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(PlayerPhysics))]
 public class PlayerController : MonoBehaviour {
 
-	public float gravity = 20;
-	public float speed = 20;
-	public float acceleration = 30;
-	public float jumpHeight = 14;
+	public float speed;
 
-	private float currentSpeed;
-	private float targetSpeed;
-	private Vector2 amountToMove;
+	private Rigidbody rb;
 
 	Vector3 offsetAcceleration;
 	Vector3 initialAcceleration;
 
-	private PlayerPhysics PlayerPhysics;
-
-	void Start () {
+	void Start ()
+	{
 		initialAcceleration = Input.acceleration;
-		PlayerPhysics = GetComponent<PlayerPhysics> ();
+		rb = GetComponent<Rigidbody>();
 	}
-	
-	void Update () {
+
+	void FixedUpdate ()
+	{
+		//float moveHorizontal = Input.GetAxis ("Horizontal");
+		//float moveVertical = Input.GetAxis ("Vertical");
 		offsetAcceleration = Input.acceleration - initialAcceleration;
-		targetSpeed = offsetAcceleration.x * speed;
+		float moveHorizontal = offsetAcceleration.x;
+		float moveVertical = offsetAcceleration.y;
 
-		if (PlayerPhysics.grounded) {
-			amountToMove.y = 0;
-			if (Input.touchCount > 0) {
-				amountToMove.y = jumpHeight;
-			}
-		}
-		if (PlayerPhysics.groundbot) {
-			amountToMove.y = 0;
-		}
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-		currentSpeed = IncrementTowards (currentSpeed, targetSpeed, acceleration);
-
-		amountToMove.x = currentSpeed;
-		amountToMove.y -= gravity * Time.deltaTime;
-		PlayerPhysics.Move (amountToMove * Time.deltaTime);
-	}
-
-	private float IncrementTowards(float n, float target, float a) {
-		if (n == target) {
-			return n;	
-		}
-		else {
-			float dir = Mathf.Sign(target - n);
-			n += a * Time.deltaTime * dir;
-			return (dir == Mathf.Sign(target-n))? n: target;
-		}
+		rb.AddForce (movement * speed * Time.deltaTime);
 	}
 }
