@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
 
         healthSlider.value = currentHealth;
 
-        playerAudio.Play ();
+        //playerAudio.Play ();
 
         if(currentHealth <= 0 && !isDead)
         {
@@ -82,6 +82,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void RestartLevel ()
     {
-        SceneManager.LoadScene (0);
+		SceneManager.LoadScene ("Level 01");
     }
 }
