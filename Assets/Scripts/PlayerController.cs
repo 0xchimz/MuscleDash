@@ -5,9 +5,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float gravity = 20;
-	public float speed = 8;
+	public float speed = 20;
 	public float acceleration = 30;
-	public float jumpHeight = 12;
+	public float jumpHeight = 14;
 
 	private float currentSpeed;
 	private float targetSpeed;

@@ -7,7 +7,7 @@ public class PlayerPhysics : MonoBehaviour {
 
 	public LayerMask collisionMask;
 
-	private BoxCollider collider;
+	private BoxCollider colliderBox;
 	private Vector3 s;
 	private Vector3 c;
 
@@ -25,9 +25,9 @@ public class PlayerPhysics : MonoBehaviour {
 	RaycastHit hit;
 
 	void Start() {
-		collider = GetComponent<BoxCollider>();
-		s = collider.size;
-		c = collider.center;
+		colliderBox = GetComponent<BoxCollider>();
+		s = colliderBox.size;
+		c = colliderBox.center;
 	}
 
 	public void Move(Vector2 moveAmount) {
