@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  dashSpeed: 30
+  dashSpeed: 25
   startingMana: 100
   currentMana: 0
   manaSlider: {fileID: 51417784}
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 424564170}
   enemy: {fileID: 104722, guid: 2f8e5dcb17eda3542bf9cd4ef63425e3, type: 2}
-  spawnTime: 3
+  spawnTime: 50
   spawnPoints:
   - {fileID: 827532841}
 --- !u!114 &941966908
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 424564170}
   enemy: {fileID: 100000, guid: ffdde77c7de2ec246907b187471ed7d0, type: 2}
-  spawnTime: 3
+  spawnTime: 15
   spawnPoints:
   - {fileID: 694880100}
 --- !u!114 &941966909
