@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  dashSpeed: 50
+  dashSpeed: 30
   startingMana: 100
   currentMana: 0
   manaSlider: {fileID: 51417784}

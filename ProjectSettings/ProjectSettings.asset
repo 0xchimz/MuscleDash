@@ -17,8 +17,8 @@ PlayerSettings:
   m_VirtualRealitySplashScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidthWeb: 1024
+  defaultScreenHeightWeb: 768
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   m_ActiveColorSpace: 1
@@ -345,7 +345,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: CROSS_PLATFORM_INPUT
     2: CROSS_PLATFORM_INPUT
-    4: CROSS_PLATFORM_INPUT
+    4: 
     7: CROSS_PLATFORM_INPUT
     15: CROSS_PLATFORM_INPUT
     16: CROSS_PLATFORM_INPUT
