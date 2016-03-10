@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate ()
 	{
 		if (currentMana != 100) {
-			currentMana += 1;
+			currentMana += 2;
 		}
 		manaSlider.value = currentMana;
 
