@@ -2,7 +2,6 @@
 
 public class EnemyManager : MonoBehaviour
 {
-	public PlayerHealth playerHealth;
 	public GameObject enemy;
 	public float spawnTime = 3f;
 	public Transform[] spawnPoints;
@@ -13,10 +12,9 @@ public class EnemyManager : MonoBehaviour
 		InvokeRepeating ("Spawn", spawnTime, spawnTime);
 	}
 
-
 	void Spawn ()
 	{
-		if (playerHealth.currentHealth <= 0f) {
+		if (GameController.instance.IsGameOver ()) {
 			return;
 		}
 

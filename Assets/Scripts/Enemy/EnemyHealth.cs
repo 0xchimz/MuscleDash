@@ -2,79 +2,50 @@
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
-    public int currentHealth;
-    public float sinkSpeed = 2.5f;
-    public int scoreValue = 10;
-    public AudioClip deathClip;
+	public int point = 10;
+	public int fullHp = 100;
+	public int hp;
+	public float sinkSpeed = 2.5f;
+	public int scoreValue = 10;
 
+	AudioSource enemyAudio;
+	ParticleSystem hitParticles;
+	Enemy enemy;
 
-    Animator anim;
-    AudioSource enemyAudio;
-    ParticleSystem hitParticles;
-    CapsuleCollider capsuleCollider;
-    bool isDead;
-    bool isSinking;
+	void Awake ()
+	{
+		enemy = GetComponent <Enemy> ();
+		enemyAudio = GetComponent <AudioSource> ();
+		hitParticles = GetComponentInChildren <ParticleSystem> ();
 
+		hp = fullHp;
+	}
 
-    void Awake ()
-    {
-        anim = GetComponent <Animator> ();
-        enemyAudio = GetComponent <AudioSource> ();
-        hitParticles = GetComponentInChildren <ParticleSystem> ();
-        capsuleCollider = GetComponent <CapsuleCollider> ();
+	void Update ()
+	{
+		if (enemy.IsSinking()) {
+			transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+		}
+	}
 
-        currentHealth = startingHealth;
-    }
+	public void TakeDamage (int amount)
+	{
+		if (enemy.IsDead())
+			return;
 
+		Debug.Log ("hit");
+		enemyAudio.Play ();
+		hp -= amount;
 
-    void Update ()
-    {
-        if(isSinking)
-        {
-            transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
-        }
-    }
+		if (hp <= 0) {
+			hp = 0;
+			enemy.Death ();
+		}
+	}
 
+	public void KnockBack (Vector3 direction) {
+		hitParticles.transform.position = direction;
 
-    public void TakeDamage (int amount, Vector3 hitPoint)
-    {
-        if(isDead)
-            return;
-
-        enemyAudio.Play ();
-
-        currentHealth -= amount;
-            
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
-
-        if(currentHealth <= 0)
-        {
-            Death ();
-        }
-    }
-
-
-    void Death ()
-    {
-        isDead = true;
-
-        capsuleCollider.isTrigger = true;
-
-        anim.SetTrigger ("Dead");
-
-        enemyAudio.clip = deathClip;
-        enemyAudio.Play ();
-    }
-
-
-    public void StartSinking ()
-    {
-        GetComponent <NavMeshAgent> ().enabled = false;
-        GetComponent <Rigidbody> ().isKinematic = true;
-        isSinking = true;
-        //ScoreManager.score += scoreValue;
-        Destroy (gameObject, 2f);
-    }
+		hitParticles.Play ();
+	}
 }

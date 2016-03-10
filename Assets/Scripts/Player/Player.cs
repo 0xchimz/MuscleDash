@@ -3,63 +3,64 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 	public static readonly int NORMAL = 0, DASH = 1;
 	public float speed = 6f;
-	public float dashSpeed = 50f;
+	public float dashSpeed = 25f;
 
-	public int startingMana = 100;
-	public int currentMana;
+	public int fullMana = 100;
+	public int mana;
 	public Slider manaSlider;
+	public int atk = 1000;
 
 	public float maxTimeDash = 10.0f;
 
 	Vector3 movement;
 	Animator anim;
-	Rigidbody playerRigidbody;
-	int floorMask;
-	//	float camRayLength = 100f;
+	Rigidbody rigidbody;
 
-	ParticleSystem dashParticles;
+	public TrailRenderer dashParticles;
 
 	Vector3 offsetAcceleration;
 	Vector3 initialAcceleration;
 
-	public int playerStatus;
+	int status;
 	float timer;
 
 	void Awake ()
 	{
-		currentMana = startingMana;
-		playerStatus = NORMAL;
+		mana = fullMana;
+		status = NORMAL;
 		initialAcceleration = Input.acceleration;
-		floorMask = LayerMask.GetMask ("Floor");
 		anim = GetComponent<Animator> ();
-		playerRigidbody = GetComponent<Rigidbody> ();
+		rigidbody = GetComponent<Rigidbody> ();
+		manaSlider.maxValue = fullMana;
 	}
 
 	void FixedUpdate ()
 	{
-		if (currentMana != 100) {
-			currentMana += 2;
+		if (mana != 300) {
+			mana += 2;
 		}
-		manaSlider.value = currentMana;
+
+		manaSlider.value = mana;
 
 		Vector3 direction = transform.forward;
-		if (playerStatus == DASH) {
+		if (status == DASH) {
 			if (timer < maxTimeDash) {
 				Move (direction.x, dashSpeed, direction.z);
 				timer += 1f;
 			} else {
-				playerStatus = NORMAL;
+				status = NORMAL;
 			}
-		} else {
-			if (Input.touchCount > 0 && currentMana == 100) {
-				playerStatus = DASH;
+			dashParticles.enabled = true;
+		} else if (status == NORMAL) {
+			if (Input.touchCount > 0 && mana >= 100) {
+				status = DASH;
 				timer = 0.0f;
 				Move (direction.x, dashSpeed, direction.z);
-				currentMana = 0;
+				mana -= 100;
 			} else {
 				offsetAcceleration = Input.acceleration - initialAcceleration;
 				float h = offsetAcceleration.x;
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
 				Turning ();
 				Animating (h, v);
 			}
+			dashParticles.enabled = false;
 		}
 	}
 
@@ -82,8 +84,7 @@ public class PlayerMovement : MonoBehaviour
 		movement.Set (h, 0f, v);
 
 		movement = movement.normalized * s * Time.deltaTime;
-//		Debug.Log (movement.normalized);
-		playerRigidbody.MovePosition (transform.position + movement);
+		rigidbody.MovePosition (transform.position + movement);
 	}
 
 	void Turning ()
@@ -94,29 +95,26 @@ public class PlayerMovement : MonoBehaviour
 			playerToMouse.y = 0f;
 			Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
 
-			playerRigidbody.MoveRotation (newRotation);
+			rigidbody.MoveRotation (newRotation);
 		}
 	}
 
 	void Animating (float h, float v)
 	{
 		bool walking = h != 0f || v != 0f;
-
 		anim.SetBool ("IsWalking", walking);
 	}
 
 	void OnTriggerEnter (Collider other)
 	{
+		if (other.tag == "Enemy" && status == DASH) {
+//			Debug.Log (other.gameObject.name);
 
-		Debug.Log ("collided");
+			Vector3 direction = transform.position;
 
-		if (other.tag == "Enemy") {
-			// Destroy Object
-			// Instantiate (expEffect, this.transform.position, Quaternion.identity);
-			// Destroy(other.gameObject);
-			Debug.Log (other.gameObject.name);
-			//GameController.instance.currentScore += 1;
-			GameController.instance.AddScore (10);
+			other.gameObject.SendMessage ("TakeDamage", atk);
+			other.gameObject.SendMessage ("KnockBack", direction);
 		}
 	}
+
 }

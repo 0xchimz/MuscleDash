@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class GameController : MonoBehaviour
 	public int score;
 	public Text scoreText;
 
+	bool gameOver;
+
 	void Awake ()
 	{
 		instance = this;
@@ -18,14 +22,28 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-		
 	}
 
 	public void AddScore (int amount)
 	{
-		Debug.Log ("score: " + score.ToString ());
+//		Debug.Log ("score: " + score.ToString ());
 
 		score += amount;
 		scoreText.text = "Score: " + score.ToString ();
+	}
+
+	public void GameOver ()
+	{
+		gameOver = true;
+	}
+
+	public bool IsGameOver ()
+	{
+		return gameOver;
+	}
+
+	public void Restart()
+	{
+		SceneManager.LoadScene ("Level 01");
 	}
 }
