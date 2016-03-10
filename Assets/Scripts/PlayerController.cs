@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
 	public float speed;
 
@@ -13,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	void Start ()
 	{
 		initialAcceleration = Input.acceleration;
-		rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody> ();
 	}
 
 	void FixedUpdate ()

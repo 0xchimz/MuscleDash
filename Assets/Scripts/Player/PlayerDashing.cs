@@ -7,18 +7,18 @@ public class PlayerDashing : MonoBehaviour
 	GameObject player;
 	PlayerMovement playerMovement;
 
-	void Awake()
+	void Awake ()
 	{
 		dashParticles = GetComponent<TrailRenderer> ();
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		playerMovement = player.GetComponent<PlayerMovement> ();
 	}
 
-	void FixedUpdate()
+	void FixedUpdate ()
 	{
 		if (playerMovement.playerStatus == PlayerMovement.DASH) {
 			dashParticles.enabled = true;
-		} else if(playerMovement.playerStatus == PlayerMovement.NORMAL){
+		} else if (playerMovement.playerStatus == PlayerMovement.NORMAL) {
 			dashParticles.enabled = false;
 		}
 	}

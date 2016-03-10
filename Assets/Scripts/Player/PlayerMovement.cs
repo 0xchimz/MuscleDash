@@ -19,17 +19,17 @@ public class PlayerMovement : MonoBehaviour
 	Animator anim;
 	Rigidbody playerRigidbody;
 	int floorMask;
-//	float camRayLength = 100f;
+	//	float camRayLength = 100f;
 
 	ParticleSystem dashParticles;
 
 	Vector3 offsetAcceleration;
 	Vector3 initialAcceleration;
 
-	public int playerStatus; 
+	public int playerStatus;
 	float timer;
 
-	void Awake()
+	void Awake ()
 	{
 		currentMana = startingMana;
 		playerStatus = NORMAL;
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 	}
 
-	void FixedUpdate()
+	void FixedUpdate ()
 	{
 		if (currentMana != 100) {
 			currentMana += 1;
@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
 				float h = offsetAcceleration.x;
 				float v = offsetAcceleration.y;
 
-				if (Mathf.Abs(h) < 0.1)
+				if (Mathf.Abs (h) < 0.1)
 					h = 0.0f;
-				if (Mathf.Abs(v) < 0.1)
+				if (Mathf.Abs (v) < 0.1)
 					v = 0.0f;
 
 				Move (h, speed, v);
@@ -76,12 +76,13 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 	}
+
 	void Move (float h, float s, float v)
 	{
 		movement.Set (h, 0f, v);
 
 		movement = movement.normalized * s * Time.deltaTime;
-		Debug.Log (movement.normalized);
+//		Debug.Log (movement.normalized);
 		playerRigidbody.MovePosition (transform.position + movement);
 	}
 
@@ -102,5 +103,20 @@ public class PlayerMovement : MonoBehaviour
 		bool walking = h != 0f || v != 0f;
 
 		anim.SetBool ("IsWalking", walking);
+	}
+
+	void OnTriggerEnter (Collider other)
+	{
+
+		Debug.Log ("collided");
+
+		if (other.tag == "Enemy") {
+			// Destroy Object
+			// Instantiate (expEffect, this.transform.position, Quaternion.identity);
+			// Destroy(other.gameObject);
+			Debug.Log (other.gameObject.name);
+			//GameController.instance.currentScore += 1;
+			GameController.instance.AddScore (10);
+		}
 	}
 }
