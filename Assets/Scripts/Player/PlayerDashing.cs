@@ -4,10 +4,23 @@ using System.Collections;
 public class PlayerDashing : MonoBehaviour
 {
 	TrailRenderer dashParticles;
+	GameObject player;
+	PlayerMovement playerMovement;
 
 	void Awake()
 	{
 		dashParticles = GetComponent<TrailRenderer> ();
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		playerMovement = player.GetComponent<PlayerMovement> ();
+	}
+
+	void FixedUpdate()
+	{
+		if (playerMovement.playerStatus == PlayerMovement.DASH) {
+			dashParticles.enabled = true;
+		} else if(playerMovement.playerStatus == PlayerMovement.NORMAL){
+			dashParticles.enabled = false;
+		}
 	}
 }
 /*    public int damagePerShot = 20;

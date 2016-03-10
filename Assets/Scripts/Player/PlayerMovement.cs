@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public readonly int NORMAL = 0, DASH = 1;
+	public static readonly int NORMAL = 0, DASH = 1;
 	public float speed = 6f;
 	public float dashSpeed = 50f;
 
