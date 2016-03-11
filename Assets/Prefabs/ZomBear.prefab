@@ -50,6 +50,7 @@ GameObject:
   - 114: {fileID: 11424350}
   - 82: {fileID: 8210884}
   - 114: {fileID: 11401720}
+  - 76: {fileID: 7608324}
   m_Layer: 9
   m_Name: ZomBear
   m_TagString: Enemy
@@ -169,6 +170,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!76 &7608324
+WorldParticleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112144}
+  m_BounceFactor: 0.5
+  m_CollisionEnergyLoss: 0
+  m_CollidesWith:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_SendCollisionMessage: 1
+  m_MinKillVelocity: 0
 --- !u!82 &8210884
 AudioSource:
   m_ObjectHideFlags: 1

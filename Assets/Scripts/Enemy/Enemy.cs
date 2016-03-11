@@ -61,5 +61,5 @@ public class Enemy : MonoBehaviour
 		isSinking = true;
 		Destroy (gameObject, 2f);
 	}
-	
+
 }

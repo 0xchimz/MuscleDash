@@ -32,8 +32,7 @@ public class EnemyHealth : MonoBehaviour
 	{
 		if (enemy.IsDead())
 			return;
-
-		Debug.Log ("hit");
+	
 		enemyAudio.Play ();
 		hp -= amount;
 
@@ -47,5 +46,10 @@ public class EnemyHealth : MonoBehaviour
 		hitParticles.transform.position = direction;
 
 		hitParticles.Play ();
+	}
+
+	void OnParticleCollision(GameObject other) {
+		TakeDamage (100);
+		Debug.Log ("OnParticleCollision: " + other.name);
 	}
 }

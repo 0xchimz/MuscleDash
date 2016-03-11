@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11443280}
   - 114: {fileID: 11481690}
   - 114: {fileID: 11496782}
+  - 76: {fileID: 7602082}
   m_Layer: 9
   m_Name: Zombunny
   m_TagString: Enemy
@@ -110,6 +111,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!76 &7602082
+WorldParticleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133146}
+  m_BounceFactor: 0.5
+  m_CollisionEnergyLoss: 0
+  m_CollidesWith:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_SendCollisionMessage: 1
+  m_MinKillVelocity: 0
 --- !u!82 &8214520
 AudioSource:
   m_ObjectHideFlags: 1

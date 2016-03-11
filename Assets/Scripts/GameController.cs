@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 	public Text scoreText;
 
 	bool gameOver;
+	public bool paused;
 
 	void Awake ()
 	{
@@ -45,5 +46,8 @@ public class GameController : MonoBehaviour
 	public void Restart()
 	{
 		SceneManager.LoadScene ("Level 01");
+	}
+	public void OnApplicationPause(bool pauseStatus) {
+		paused = pauseStatus;
 	}
 }
