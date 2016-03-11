@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515260c790cfb4dabbba02ff36895504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullHp: 10000
+  fullHp: 500
   hp: 0
   hpText: {fileID: 1550336055}
   hpSlider: {fileID: 1679251252}
@@ -2044,7 +2044,7 @@ MonoBehaviour:
   spSlider: {fileID: 559469958}
   gainSP: 1
   maxTimeDash: 10
-  maxTimeSkill: 5
+  maxTimeSkill: 20
   dashParticles: {fileID: 369464101}
 --- !u!1 &450657908
 GameObject:

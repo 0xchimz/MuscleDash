@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 	public int gainSP = 1;
 
 	public float maxTimeDash = 10.0f;
-	public float maxTimeSkill = 600.0f;
+	public float maxTimeSkill = 30.0f;
 
 	Vector3 movement;
 	Animator anim;
