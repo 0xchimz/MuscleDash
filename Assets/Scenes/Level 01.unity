@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515260c790cfb4dabbba02ff36895504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullHp: 1000000
+  fullHp: 10000
   hp: 0
   hpText: {fileID: 1550336055}
   hpSlider: {fileID: 1679251252}
